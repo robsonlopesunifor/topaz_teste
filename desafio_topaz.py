@@ -1,4 +1,5 @@
 import unittest
+import os
 
 
 class Balance:
@@ -90,6 +91,18 @@ class Balance:
 
 
 class TestBalance(unittest.TestCase):
+
+    def test_balance(self):
+        saida_desejada = [
+            '1', '2,2', '2,2', '2,2,1', '1,2,1', '2', '2', '1', '1', '0', '15']
+        balance = Balance('input.txt', 'output.txt')
+        file = open("output.txt","w")
+        file.close()
+        self.assertEqual(os.stat("output.txt").st_size, 0)
+        balance.process()
+        with open('output.txt') as f:
+            resposta = [x for x in f.read().split()]
+        self.assertEqual(resposta, saida_desejada)
 
     def test_load_file(self):
         balance = Balance('input.txt')
@@ -187,15 +200,6 @@ class TestBalance(unittest.TestCase):
         self.assertEqual(balance._process_input(), (9, 0, '1'))
         self.assertEqual(balance._process_input(), (10, 0, '0'))
         self.assertEqual(balance.cost, 15)
-
-    def test_file_gerado(self):
-        balance = Balance('input.txt', 'output.txt')
-        balance.process()
-        saida_desejada = [
-            '1', '2,2', '2,2', '2,2,1', '1,2,1', '2', '2', '1', '1', '0', '15']
-        with open('output.txt') as f:
-            resposta = [x for x in f.read().split()]
-        self.assertEqual(resposta, saida_desejada)
 
 
 if __name__ == '__main__':
