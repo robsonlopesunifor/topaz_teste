@@ -78,16 +78,16 @@ class Balance:
         self.servers.append([0 for _ in range(self.umax)])
 
     def _free_server(self):
-        resposta = None
+        response = None
         for idx_server, server in enumerate(self.servers):
             for idx_celula, celula in enumerate(server):
-                if celula == 0:
+                if not celula:
                     return (idx_server, idx_celula)
-        return resposta
+        return response
 
     def _user_by_server(self):
-        total_usuario = []
+        total_user = []
         for server in self.servers:
-            total_usuario.append(sum([1 for celula in server if celula > 0]))
-        resposta = ','.join(str(usuarios) for usuarios in total_usuario)
-        return resposta if resposta != '' else '0'
+            total_user.append(sum([1 for celula in server if celula > 0]))
+        response = ','.join(str(users) for users in total_user)
+        return response if response else '0'
