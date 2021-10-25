@@ -6,7 +6,15 @@ Para os dados de entrada basta passa os arquivos input.txt e output.txt que se e
 
 ## Executar o Código 
 
+Para rodar os testes execulte esse comando no terminal apartir da pasta raiz.
 ```
+python3 -m unittest test.test_balance
+
+```
+
+## Como instaciar a classe Balance
+```
+from Balance import Balance
 balance = Balance('input.txt', 'output.txt')
 balance.process()
 ```
